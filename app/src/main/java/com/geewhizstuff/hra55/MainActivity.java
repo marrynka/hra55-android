@@ -14,6 +14,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.util.Log;
 import java.util.List;
+import android.media.MediaPlayer;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -117,11 +119,26 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (found) {
+            int resource = R.raw.bravo1;
+            Random rand = new Random(System.currentTimeMillis());
+            int random = rand.nextInt(3);
+            switch(random){
+                case 0: resource = R.raw.bravo1; break;
+                case 1: resource = R.raw.bravo2; break;
+                case 2: resource = R.raw.bravo3; break;
+
+            }
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, resource);
+            mediaPlayer.start();
             int id;
             id = getResources().getIdentifier("answer"+(i+1), "id", getPackageName());
             TextView answerView = (TextView) findViewById(id);
             answerView.setText(response);
+        } else {
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.sad);
+            mediaPlayer.start();
         }
+
     }
 
 }
